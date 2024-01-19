@@ -22,7 +22,6 @@ git pull
 ## Jouer les commandes suivantes
 
 ```bash
-git remote -vv
 
 git add .
 
