@@ -1,0 +1,6 @@
+# Ignore all .o files
+*.o
+
+# Ignore the "uno" file
+uno
+
