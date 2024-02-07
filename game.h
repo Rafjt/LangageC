@@ -4,8 +4,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-extern int tour;
-extern int direction;
 
 int next_tour(int tour, int direction);
 int skip_tour(int tour, int direction);
