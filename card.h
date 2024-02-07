@@ -13,5 +13,6 @@ struct carte{
 };
 struct carte pioche [MAX_CARDS];
 void storeCards(struct carte pioche[]);
+void pickSevenCards(struct carte pioche[], struct carte hand[], int size);
 
 #endif 
