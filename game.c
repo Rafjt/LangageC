@@ -28,3 +28,11 @@ int reverse_tour(int tour, int direction) {
         return tour + 1;
     }
 }
+
+int whichPlayer(int tour) {
+    if (tour % 2 == 0) {
+        return 1; 
+    } else {
+        return 2; 
+    }
+}

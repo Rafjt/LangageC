@@ -22,11 +22,9 @@ void storeCards(struct carte pioche []) {
 
 
 
-// Include this at the top of your file
-void pickSevenCards(struct carte pioche[], struct carte hand[], int size) {
-    srand(time(0)); // Seed the random number generator
+void pickSevenCards(struct carte pioche[], struct carte hand1[], struct carte hand2[], int size) {
+    srand(time(0)); 
 
-    // Shuffle the array
     for (int i = size - 1; i > 0; i--) {
         int j = rand() % (i + 1);
 
@@ -35,8 +33,18 @@ void pickSevenCards(struct carte pioche[], struct carte hand[], int size) {
         pioche[j] = temp;
     }
 
-    // Pick the first seven cards
+    // Distribute cards to two hands
     for (int i = 0; i < 7; i++) {
-        hand[i] = pioche[i];
+        hand1[i] = pioche[i];
+        hand2[i] = pioche[i + 7];
     }
+}
+
+
+int countCards(struct carte hand[], int size) {
+    int count = 0;
+    for (int i = 0; i < size; i++) {
+        count++;
+    }
+    return count;
 }
