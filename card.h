@@ -6,13 +6,16 @@
 #include <string.h>
 #define MAX_CARDS 60
 
-struct carte{
+
+typedef struct carte {
     char couleur;
     int nombre;
     int special;
-};
-struct carte pioche [MAX_CARDS];
-void storeCards(struct carte pioche[]);
-void pickSevenCards(struct carte pioche[], struct carte hand[], int size);
+} carte;
+
+carte pioche [MAX_CARDS];
+void storeCards(carte pioche[]);
+void pickSevenCards(carte pioche[],carte hand[],carte hand2[], int size);
+int countCards(carte hand[], int size);
 
 #endif 

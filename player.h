@@ -4,6 +4,7 @@
 #ifndef PLAYER_H
 #define PLAYER_H
  
- struct carte hand[7];
+  carte hand[7];
+  carte hand2[7];
 
  #endif

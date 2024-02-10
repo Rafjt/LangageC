@@ -1,18 +1,17 @@
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror
-SRC = card.c game.c gui.c main.c network.c player.c
+LDFLAGS = -lSDL2
+TARGET = main
+SRC = main.c
 OBJ = $(SRC:.c=.o)
-HDR = card.h game.h gui.h network.h player.h
-EXE = uno
 
-all: $(EXE)
+all: $(TARGET)
 
-$(EXE): $(OBJ)
-	$(CC) $(CFLAGS) -o $@ $^
+$(TARGET): $(OBJ)
+	$(CC) $(CFLAGS) -o $@ $^ $(LDFLAGS)
 
-%.o: %.c $(HDR)
+%.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	rm -f $(OBJ) $(EXE)
+	rm -f $(OBJ) $(TARGET)
 
