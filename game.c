@@ -37,7 +37,7 @@ int whichPlayer(int tour) {
     }
 }
 
-checkWin(int size_hand1, int size_hand2) {
+int checkWin(int size_hand1, int size_hand2) {
     if (size_hand1 == 0) {
         printf("Player 1 wins\n");
     } else if (size_hand2 == 0) {
