@@ -39,10 +39,12 @@ int main(){
     int size_hand1 = sizeof(hand) / sizeof(hand[0]);
     int size_hand2 = sizeof(hand2) / sizeof(hand2[0]);
 
-    while(size_hand1 > 0 || size_hand2 > 0){
-    printf("Au tour du joueur %d\n", whichPlayer(tour));
-    
-}
-}
+    for(cpt = 15; cpt != 0; cpt--){
+    tour = next_tour(tour, direction);
+    int player = whichPlayer(tour);
+    printf("au tour du joueur : %d\n", player);
+    }
+    return 0;
 
 
+}
