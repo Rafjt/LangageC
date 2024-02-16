@@ -44,3 +44,4 @@ int checkWin(int size_hand1, int size_hand2) {
         printf("Player 2 wins\n");
     }
 }
+

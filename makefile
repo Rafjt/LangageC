@@ -1,5 +1,5 @@
 CC = gcc
-LDFLAGS =-lSDL2
+LDFLAGS = -lSDL2
 TARGET = uno
 SRC = main.c card.c game.c player.c gui.c network.c  
 OBJ = $(SRC:.c=.o)

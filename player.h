@@ -7,4 +7,8 @@
   carte hand[7];
   carte hand2[7];
 
+typedef struct player {
+    int id;
+} player;
+
  #endif
