@@ -1,7 +1,7 @@
 CC = gcc
 LDFLAGS = -lSDL2
-TARGET = main
-SRC = main.c
+TARGET = uno
+SRC = main.c card.c game.c player.c gui.c network.c  # Add other source files here
 OBJ = $(SRC:.c=.o)
 
 all: $(TARGET)
@@ -14,4 +14,6 @@ $(TARGET): $(OBJ)
 
 clean:
 	rm -f $(OBJ) $(TARGET)
+
+.PHONY: all clean
 

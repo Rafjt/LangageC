@@ -35,14 +35,15 @@ int main(){
     for (int i = 0; i < 7; i++) {
         printf("Hand 2 - Card %d: %c %d %d\n", i+1, hand2[i].couleur, hand2[i].nombre, hand2[i].special);
     }
+    return 0;
 
     int size_hand1 = sizeof(hand) / sizeof(hand[0]);
     int size_hand2 = sizeof(hand2) / sizeof(hand2[0]);
 
     while(size_hand1 > 0 || size_hand2 > 0){
     printf("Au tour du joueur %d\n", whichPlayer(tour));
-    
-}
-}
+    }
 
 
+
+}
