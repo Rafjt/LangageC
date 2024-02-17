@@ -50,20 +50,12 @@ int countCards(struct carte hand[], int size) {
 }
 
 
-void pickCard(carte* pioche, int* size_pioche, carte* hand, int* size_hand) {
-    srand(time(NULL)); // Seed the random number generator
-    int index = rand() % *size_pioche; // Generate a random index
-
-    // Add the card to the player's hand
-    hand[*size_hand] = pioche[index];
+void pickCard(carte* pioche, int* cpt_pioche, carte* hand, int* size_hand) {
+    // Add the card at the current cpt_pioche index to the player's hand
+    hand[*size_hand] = pioche[*cpt_pioche];
     (*size_hand)++;
 
-    // Shift all cards down by one to fill the gap
-    for (int i = index; i < *size_pioche - 1; i++) {
-        pioche[i] = pioche[i + 1];
-    }
-
-    // Decrease the size of the deck
-    (*size_pioche)--;
+    // Increase cpt_pioche by 1
+    (*cpt_pioche)++;
 }
 

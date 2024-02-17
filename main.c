@@ -12,6 +12,9 @@ int main(){
     int direction = 0;
     int cpt_pioche = 14;
 
+    // pour apppeler pickCard pour le joueur 1 = pickCard(pioche, &cpt_pioche, hand, &size_hand1);
+    // pour apppeler pickCard pour le joueur 2 = pickCard(pioche, &cpt_pioche, hand2, &size_hand2);
+
     storeCards(pioche);
     pickSevenCards(pioche, hand, hand2, MAX_CARDS);
 
@@ -31,11 +34,16 @@ int main(){
             }
             int valid_play = 0; 
             do {
-                printf("quel carte voulez vous jouer ?\n");
+                printf("Quelle carte voulez-vous jouer ? (Entrez 0 pour piocher une carte)\n");
                 scanf("%d", &choix);
-                if (choix > size_hand1 || choix <= 0){
-                    printf("choix invalide\n");
-                } else if (hand[choix-1].nombre == 13 || hand[choix-1].nombre == 14 || hand[choix-1].couleur == pioche[cpt_pioche].couleur || hand[choix-1].nombre == pioche[cpt_pioche].nombre){
+
+                if (choix == 0) {
+                    pickCard(pioche, &cpt_pioche, hand, &size_hand1);
+                    printf("Vous avez pioché une carte. Il vous reste %d cartes\n", size_hand1);
+                    break;
+                } else if (choix > size_hand1 || choix <= 0) {
+                    printf("Choix invalide\n");
+                } else if (hand[choix-1].nombre == 13 || hand[choix-1].nombre == 14 || hand[choix-1].couleur == pioche[cpt_pioche].couleur || hand[choix-1].nombre == pioche[cpt_pioche].nombre) {
                     pioche[cpt_pioche] = hand[choix-1]; 
                     for (int i = choix-1; i < size_hand1; i++){
                         hand[i] = hand[i+1];
@@ -45,39 +53,41 @@ int main(){
                     printf("il vous reste %d cartes\n", size_hand1);
                     valid_play = 1; 
                 } else {
-                    printf("choix invalide\n");
+                    printf("Choix invalide\n");
                 }
             } while (!valid_play && (choix > size_hand1 || choix <= 0 || !(hand[choix-1].nombre == 13 || hand[choix-1].nombre == 14 || hand[choix-1].couleur == pioche[cpt_pioche].couleur || hand[choix-1].nombre == pioche[cpt_pioche].nombre)));
-        }else if (player_turn == 2) {
-        for (int cpt = 0; cpt < size_hand2; cpt++) {
-            printf("Hand 2 - Card %d: %c %d %d\n", cpt+1, hand2[cpt].couleur, hand2[cpt].nombre, hand2[cpt].special);
-        }
-
-        int valid_play = 0; 
-        do {
-            printf("Quelle carte voulez-vous jouer ?\n");
-            scanf("%d", &choix);
-
-            if (choix > size_hand2 || choix <= 0) {
-                printf("Choix invalide\n");
-            } else if (hand2[choix-1].nombre == 13 || hand2[choix-1].nombre == 14 || hand2[choix-1].couleur == pioche[cpt_pioche].couleur || hand2[choix-1].nombre == pioche[cpt_pioche].nombre) {
-                pioche[cpt_pioche] = hand2[choix-1]; 
-
-                for (int i = choix-1; i < size_hand2; i++) {
-                    hand2[i] = hand2[i+1];
-                }
-
-                size_hand2--;
-
-                printf("La carte jouée est %c %d %d\n", pioche[cpt_pioche].couleur, pioche[cpt_pioche].nombre, pioche[cpt_pioche].special);
-                printf("Il vous reste %d cartes\n", size_hand2);
-                valid_play = 1; 
-            } else {
-                printf("Choix invalide\n");
+        } else if (player_turn == 2) {
+            for (int cpt = 0; cpt < size_hand2; cpt++) {
+                printf("Hand 2 - Card %d: %c %d %d\n", cpt+1, hand2[cpt].couleur, hand2[cpt].nombre, hand2[cpt].special);
             }
-        } while (!valid_play && (choix > size_hand2 || choix <= 0 || !(hand2[choix-1].nombre == 13 || hand2[choix-1].nombre == 14 || hand2[choix-1].couleur == pioche[cpt_pioche].couleur || hand2[choix-1].nombre == pioche[cpt_pioche].nombre)));
+
+            int valid_play = 0; 
+            do {
+                printf("Quelle carte voulez-vous jouer ? (Entrez 0 pour piocher une carte)\n");
+                scanf("%d", &choix);
+
+                if (choix == 0) {
+                    pickCard(pioche, &cpt_pioche, hand2, &size_hand2);
+                    printf("Vous avez pioché une carte. Il vous reste %d cartes\n", size_hand2);
+                    break;
+                } else if (choix > size_hand2 || choix <= 0) {
+                    printf("Choix invalide\n");
+                } else if (hand2[choix-1].nombre == 13 || hand2[choix-1].nombre == 14 || hand2[choix-1].couleur == pioche[cpt_pioche].couleur || hand2[choix-1].nombre == pioche[cpt_pioche].nombre) {
+                    pioche[cpt_pioche] = hand2[choix-1]; 
+
+                    for (int i = choix-1; i < size_hand2; i++) {
+                        hand2[i] = hand2[i+1];
+                    }
+
+                    size_hand2--;
+
+                    printf("La carte jouée est %c %d %d\n", pioche[cpt_pioche].couleur, pioche[cpt_pioche].nombre, pioche[cpt_pioche].special);
+                    printf("Il vous reste %d cartes\n", size_hand2);
+                    valid_play = 1; 
+                } else {
+                    printf("Choix invalide\n");
+                }
+            } while (!valid_play && (choix > size_hand2 || choix <= 0 || !(hand2[choix-1].nombre == 13 || hand2[choix-1].nombre == 14 || hand2[choix-1].couleur == pioche[cpt_pioche].couleur || hand2[choix-1].nombre == pioche[cpt_pioche].nombre)));
+        }
     }
-
-}
-
 }
