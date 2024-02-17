@@ -3,6 +3,7 @@
 #include <string.h>
 #include "game.h"
 
+
 int next_tour(int tour, int direction) {
     if (direction == 1) {
         return tour - 1;
