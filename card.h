@@ -14,6 +14,7 @@ typedef struct carte {
 } carte;
 
 carte pioche [MAX_CARDS];
+carte pile [MAX_CARDS];
 void storeCards(carte pioche[]);
 void pickSevenCards(carte pioche[],carte hand[],carte hand2[], int size);
 int countCards(carte hand[], int size);
