@@ -4,6 +4,7 @@
 #include "game.h"
 #include "card.h"
 #include "player.h"
+#include "gui.h"
 
 int main() {
     storeCards(pioche);
@@ -11,6 +12,8 @@ int main() {
     int tour = 1;
     int direction = 0;
     int cpt_pioche = 14;
+
+    displayGUI();
 
     // pour apppeler pickCard pour le joueur 1 = pickCard(pioche, &cpt_pioche, hand, &size_hand1);
     // pour apppeler pickCard pour le joueur 2 = pickCard(pioche, &cpt_pioche, hand2, &size_hand2);
