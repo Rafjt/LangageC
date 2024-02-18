@@ -11,7 +11,7 @@ int main() {
     int choix;
     int tour = 1;
     int direction = 0;
-    int cpt_pioche = 14;
+    int cpt_pioche = 17;
 
     displayGUI();
 
@@ -21,10 +21,7 @@ int main() {
     storeCards(pioche);
     pickSevenCards(pioche, hand, hand2, MAX_CARDS);
     int cpt_pile = 1;
-    pile[0] = pioche[0];
-    for (int i = 14; i < MAX_CARDS; i++) {
-        pile[i - 13] = pioche[i];
-    }
+    pile[0] = pioche[16];
 
     int size_hand1 = 7;
     int size_hand2 = 7;
