@@ -29,7 +29,7 @@ void displayGUI() {
     SDL_RenderPresent(renderer);
 
 
-    SDL_Surface* cardImage = IMG_Load("path_to_your_card_image.png");
+    SDL_Surface* cardImage = IMG_Load("1_b.png");
 if (!cardImage) {
     printf("IMG_Load: %s\n", IMG_GetError());
     // handle error
