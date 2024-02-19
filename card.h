@@ -19,5 +19,7 @@ void storeCards(carte pioche[]);
 void pickSevenCards(carte pioche[],carte hand[],carte hand2[], int size);
 int countCards(carte hand[], int size);
 void pickCard(carte* pioche, int* cpt_pioche, carte* hand, int* size_hand);
-
+int pickFourCards(carte* pioche, int* cpt_pioche, carte* hand, int* size_hand);
+int pickTwoCards(carte* pioche, int* cpt_pioche, carte* hand, int* size_hand);
+int changeColor(carte* pioche, int* cpt_pioche);
 #endif 

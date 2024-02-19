@@ -4,34 +4,42 @@
 #include "game.h"
 
 
-int next_tour(int tour, int direction) {
+TourDirection next_tour(int tour, int direction) {
+    TourDirection td;
+    td.direction = direction;  // direction doesn't change in next_tour
     if (direction == 1) {
-        return tour - 1;
+        td.tour = tour - 1;
     } else {
-        return tour + 1;
+        td.tour = tour + 1;
     }
+    return td;
 }
 
-int skip_tour(int tour,int direction) {
+TourDirection skip_tour(int tour, int direction) {
+    TourDirection td;
+    td.direction = direction;  // direction doesn't change in skip_tour
     if (direction == 1) {
-        return tour - 2;
+        td.tour = tour - 2;
     } else {
-        return tour + 2;
+        td.tour = tour + 2;
     }
+    return td;
 }
 
-int reverse_tour(int tour, int direction) {
+TourDirection reverse_tour(int tour, int direction) {
+    TourDirection td;
     if (direction == 0) {
-        direction = 1;
-        return tour - 1;
+        td.direction = 1;
+        td.tour = tour - 1;
     } else {
-        direction = 0;
-        return tour + 1;
+        td.direction = 0;
+        td.tour = tour + 1;
     }
+    return td;
 }
 
-int whichPlayer(int tour) {
-    if (tour % 2 == 0) {
+int whichPlayer(TourDirection td) {
+    if (td.tour % 2 == 0) {
         return 1; 
     } else {
         return 2; 

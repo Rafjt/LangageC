@@ -59,3 +59,35 @@ void pickCard(carte* pioche, int* cpt_pioche, carte* hand, int* size_hand) {
     (*cpt_pioche)++;
 }
 
+
+int pickFourCards(carte* pioche, int* cpt_pioche, carte* hand, int* size_hand) {
+    // Add the card at the current cpt_pioche index to the player's hand
+    for (int i = 0; i < 4; i++) {
+        hand[*size_hand] = pioche[*cpt_pioche];
+        (*size_hand)++;
+        (*cpt_pioche)++;
+    }
+    return 0;
+}
+
+
+int pickTwoCards(carte* pioche, int* cpt_pioche, carte* hand, int* size_hand) {
+    // Add the card at the current cpt_pioche index to the player's hand
+    for (int i = 0; i < 2; i++) {
+        hand[*size_hand] = pioche[*cpt_pioche];
+        (*size_hand)++;
+        (*cpt_pioche)++;
+    }
+    return 0;
+}
+
+int changeColor(carte* pile, int* cpt_pile) {
+    char color;
+    printf("\n CHANGEMENT DE COULEUR !\n");
+    printf("Quelle couleur voulez-vous choisir ? (R, B, G, Y)\n");
+    scanf(" %c", &color);
+    pile[*cpt_pile].couleur = color;
+    pile[*cpt_pile].nombre = 13;
+    (*cpt_pile)++;
+    return 0;
+}
