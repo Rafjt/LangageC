@@ -8,14 +8,14 @@ TourDirection next_tour(int tour, int direction) {
     TourDirection td;
     td.direction = direction;  // direction doesn't change in next_tour
     if (direction == 1) {
-        td.tour = tour - 1;
+        td.tour = (tour - 1 + 2) % 2;
     } else {
-        td.tour = tour + 1;
+        td.tour = (tour + 1) % 2;
     }
     return td;
 }
 
-TourDirection skip_tour(int tour, int direction) {
+TourDirection skip_tour( int tour, int direction) {
     TourDirection td;
     td.direction = direction;  // direction doesn't change in skip_tour
     if (direction == 1) {
@@ -30,19 +30,17 @@ TourDirection reverse_tour(int tour, int direction) {
     TourDirection td;
     if (direction == 0) {
         td.direction = 1;
-        td.tour = tour - 1;
     } else {
         td.direction = 0;
-        td.tour = tour + 1;
     }
     return td;
 }
 
 int whichPlayer(TourDirection td) {
     if (td.tour % 2 == 0) {
-        return 1; 
-    } else {
         return 2; 
+    } else {
+        return 1; 
     }
 }
 
