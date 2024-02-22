@@ -10,7 +10,7 @@
 
 
 int main() {
-    SDL_Window* window = SDL_CreateWindow("Game", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 800, 600, SDL_WINDOW_SHOWN);
+    SDL_Window* window = SDL_CreateWindow("Game", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 1500, 800, SDL_WINDOW_SHOWN);
     if (window == NULL) {
         printf("Could not create window: %s\n", SDL_GetError());
         SDL_Quit();
@@ -105,12 +105,17 @@ int main() {
                                 break;
                             case 14:
                                 pickFourCards(pioche, &cpt_pioche, hand2, &size_hand2);
+                                changeColor(pile, &cpt_pile);
                                 break;
                         }
                         printf("\ntour après = %d\n", td.tour);
                     }
                     printf("il vous reste %d cartes\n", size_hand1);
                     valid_play = 1;
+                    // int card_x = (window_width - HAND_WIDTH) / 2;
+                    // int card_y = (window_height - HAND_HEIGHT) / 2;
+                    // drawHand(renderer, pile[cpt_pile - 1], card_x, card_y);
+                    // SDL_RenderPresent(renderer);
                     if (size_hand1 == 1) {
                         printf("UNO !\n");
                     } else if (size_hand2 == 0) {
@@ -123,10 +128,10 @@ int main() {
             player_turn = whichPlayer(td);
        } else if (player_turn == 2) {
             int valid_play = 0;
-            mult = 0;
+            // mult = 0;
             for (int cpt = 0; cpt < size_hand2; cpt++) {
-                drawHand(renderer, hand2[cpt], cpt * HAND_WIDTH + mult, 0);
-                mult += 50;
+                drawHand(renderer, hand2[cpt], cpt * HAND_WIDTH, 0);
+                // mult += 2;
             }
             SDL_RenderPresent(renderer);
             do {
@@ -184,6 +189,8 @@ int main() {
         }
        td = next_tour(td.tour, td.direction);
      }
+    checkWin(size_hand1, size_hand2);
+    displayVictory(renderer);
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
     SDL_Quit();

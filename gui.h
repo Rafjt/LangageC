@@ -9,6 +9,7 @@ void displayGUI();
 char* getHandImageFilename(carte hand);
 SDL_Texture* loadHandImage(SDL_Renderer* renderer, carte hand);
 void drawHand(SDL_Renderer* renderer, carte hand, int x, int y);
+void displayVictory(SDL_Renderer* renderer);
 
 
 #endif

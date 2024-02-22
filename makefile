@@ -1,7 +1,7 @@
 CC = gcc
-LDFLAGS = -lSDL2 -lSDL2_image
+LDFLAGS = -lSDL2 -lSDL2_image -lSDL2_ttf
 TARGET = uno
-SRC = main.c card.c game.c player.c gui.c network.c
+SRC = main.c card.c game.c player.c gui.c 
 OBJ = $(SRC:.c=.o)
 
 UNAME_S:= $(shell uname -s)

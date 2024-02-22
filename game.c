@@ -46,9 +46,9 @@ int whichPlayer(TourDirection td) {
 
 int checkWin(int size_hand1, int size_hand2) {
     if (size_hand1 == 0) {
-        printf("Player 1 wins\n");
+        printf("\nVictoire joueur 1\n");
     } else if (size_hand2 == 0) {
-        printf("Player 2 wins\n");
+        printf("\nPlayer 2 wins\n");
     }
 }
 
