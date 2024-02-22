@@ -8,6 +8,7 @@
 #define HAND_WIDTH 50
 #define HAND_HEIGHT 75
 
+
 int main() {
     SDL_Window* window = SDL_CreateWindow("Game", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 800, 600, SDL_WINDOW_SHOWN);
     if (window == NULL) {
@@ -48,20 +49,25 @@ int main() {
 
     int size_hand1 = 7;
     int size_hand2 = 7;
+    int mult = 0;
 
      while (size_hand1 != 0 && size_hand2 != 0) {
         SDL_RenderClear(renderer);
         printf("la derniere carte jouée est %c %d %d\n", pile[cpt_pile - 1].couleur, pile[cpt_pile - 1].nombre, pile[cpt_pile - 1].special);
         player p1 = {1};
-        player p2 = {2};
+        player p2 = {2}; 
         int player_turn = whichPlayer(td);
         printf("au tour du joueur n°%d\n", player_turn);
         if (player_turn == 1) {
             int valid_play = 0;
+            int window_width, window_height;
+            SDL_GetRendererOutputSize(renderer, &window_width, &window_height);
+            int card_height = HAND_HEIGHT;
+            int card_y = window_height - card_height;  // position at the bottom
             for (int cpt = 0; cpt < size_hand1; cpt++) {
-                drawHand(renderer, hand[cpt], cpt * HAND_WIDTH, 0);
+                drawHand(renderer, hand[cpt], cpt * HAND_WIDTH, card_y);
             }
-            SDL_RenderPresent(renderer);
+        SDL_RenderPresent(renderer);
             do {
                 printf("Quelle carte voulez-vous jouer ? (Entrez 0 pour piocher une carte)\n");
                 scanf("%d", &choix);
@@ -114,11 +120,13 @@ int main() {
                     printf("Choix invalide\n");
                 }
             } while (!valid_play && (choix > size_hand1 || choix <= 0 || !(hand[choix - 1].nombre == 13 || hand[choix - 1].nombre == 14 || hand[choix - 1].couleur == pioche[cpt_pioche].couleur || hand[choix - 1].nombre == pioche[cpt_pioche].nombre)));
-            int player_turn = whichPlayer(td);
-        }else if (player_turn == 2) {
+            player_turn = whichPlayer(td);
+       } else if (player_turn == 2) {
             int valid_play = 0;
+            mult = 0;
             for (int cpt = 0; cpt < size_hand2; cpt++) {
-                drawHand(renderer, hand2[cpt], cpt * HAND_WIDTH, 0);
+                drawHand(renderer, hand2[cpt], cpt * HAND_WIDTH + mult, 0);
+                mult += 50;
             }
             SDL_RenderPresent(renderer);
             do {
@@ -157,6 +165,7 @@ int main() {
                                 break;
                             case 14:
                                 pickFourCards(pioche, &cpt_pioche, hand, &size_hand1);
+                                changeColor(pile, &cpt_pile);
                                 break;
                         }
                         printf("\ntour après = %d\n", td.tour);
@@ -173,12 +182,13 @@ int main() {
                 }
             } while (!valid_play && (choix > size_hand2 || choix <= 0 || !(hand2[choix - 1].nombre == 13 || hand2[choix - 1].nombre == 14 || hand2[choix - 1].couleur == pioche[cpt_pioche].couleur || hand2[choix - 1].nombre == pioche[cpt_pioche].nombre)));
         }
-        td = next_tour(td.tour, td.direction);
+       td = next_tour(td.tour, td.direction);
      }
-
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
     SDL_Quit();
 
     return 0;
 }
+
+    
