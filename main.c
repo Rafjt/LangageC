@@ -124,10 +124,13 @@ int main() {
     }
 
     // Set the color for drawing operations (RGBA: 53, 101, 77, 255)
+    char text[50]; 
     SDL_SetRenderDrawColor(renderer, 53, 101, 77, 255);
+    SDL_RenderClear(renderer);
+    sprintf(text, "Bienvenue, Appuyer sur entrer pour jouer !"); 
+    displayVictory(renderer, text);
 
     // Clear the current rendering target with the drawing color
-    SDL_RenderClear(renderer);
 
     // Update the screen with any rendering performed since the previous call
     SDL_RenderPresent(renderer);
@@ -153,7 +156,6 @@ int main() {
         SDL_RenderClear(renderer);
         printf("la derniere carte jouée est %c %d %d\n", pile[cpt_pile - 1].couleur, pile[cpt_pile - 1].nombre, pile[cpt_pile - 1].special);
         int player_turn = whichPlayer(td);
-        char text[50]; 
         sprintf(text, "Au tour du joueur %d", player_turn); 
         displayVictory(renderer, text); 
         if (player_turn == 1) {
