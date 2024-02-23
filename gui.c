@@ -99,21 +99,21 @@ void drawHand(SDL_Renderer* renderer, carte hand, int x, int y) {
 }
 
 
-void displayVictory(SDL_Renderer* renderer) {
+void displayVictory(SDL_Renderer* renderer, const char* text) {
     if (renderer == NULL) {
         printf("Renderer is NULL\n");
         return;
     }
 
     TTF_Init();
-    TTF_Font* font = TTF_OpenFont("Roboto/Roboto_Black.ttf", 24); // Replace with your font path and size
+    TTF_Font* font = TTF_OpenFont("Roboto/Roboto-Black.ttf", 24); // Replace with your font path and size
     if (font == NULL) {
         printf("Failed to load font: %s\n", TTF_GetError());
         return;
     }
 
     SDL_Color color = {255, 255, 255, 255}; // White color
-    SDL_Surface* surface = TTF_RenderText_Solid(font, "Victoire du joueur 1", color);
+    SDL_Surface* surface = TTF_RenderText_Solid(font, text, color);
     SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, surface);
 
     SDL_Rect rect;
@@ -122,5 +122,4 @@ void displayVictory(SDL_Renderer* renderer) {
     SDL_QueryTexture(texture, NULL, NULL, &rect.w, &rect.h);
 
     SDL_RenderCopy(renderer, texture, NULL, &rect);
-
 }

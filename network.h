@@ -1,7 +1,7 @@
 #ifndef NETWORK_H
 #define NETWORK_H
 
-#include <SDL/SDL_net.h>
+#include <SDL2/SDL_net.h>
 
 // Initializes the SDL_net library
 int network_init();
