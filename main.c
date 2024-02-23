@@ -5,6 +5,9 @@
 #include "card.h"
 #include "player.h"
 #include "gui.h"
+#include "network.h"
+#include "time.h"
+#include "SDL2/SDL.h"
 #define HAND_WIDTH 50
 #define HAND_HEIGHT 75
 
@@ -20,6 +23,9 @@
             SDL_RenderPresent(renderer);
             int choix;
             do {
+                for (int i = 0; i < *size_hand; i++) {
+                    printf("hand[%d] = %c %d %d\n", i+1, hand[i].couleur, hand[i].nombre, hand[i].special);
+                }
                 printf("Quelle carte voulez-vous jouer ? (Entrez 0 pour piocher une carte)\n");
                 scanf("%d", &choix);
 
@@ -78,6 +84,30 @@
 
 
 int main() {
+
+
+    if (network_init() < 0) {
+        fprintf(stderr, "Failed to initialize SDLNet\n");
+        return 1;
+    }
+
+    // Resolve host
+    IPaddress ip;
+    if (SDLNet_ResolveHost(&ip, "127.0.0.1", 1234) < 0) {
+        fprintf(stderr, "SDLNet_ResolveHost: %s\n", SDLNet_GetError());
+        exit(EXIT_FAILURE);
+    }
+
+    // // Open TCP socket
+    // TCPsocket socket = open_tcp_socket(&ip);
+    // if (!socket) {
+    //     fprintf(stderr, "Failed to open TCP socket\n");
+    //     return 1;
+    // }
+
+    display_ip(&ip);
+
+
     SDL_Window* window = SDL_CreateWindow("Game", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 1500, 800, SDL_WINDOW_SHOWN);
     if (window == NULL) {
         printf("Could not create window: %s\n", SDL_GetError());
@@ -123,7 +153,9 @@ int main() {
         SDL_RenderClear(renderer);
         printf("la derniere carte jouée est %c %d %d\n", pile[cpt_pile - 1].couleur, pile[cpt_pile - 1].nombre, pile[cpt_pile - 1].special);
         int player_turn = whichPlayer(td);
-        printf("au tour du joueur n°%d\n", player_turn);
+        char text[50]; 
+        sprintf(text, "Au tour du joueur %d", player_turn); 
+        displayVictory(renderer, text); 
         if (player_turn == 1) {
         td = playerTurn(player_turn, hand, &size_hand1, hand2, &size_hand2, pile, &cpt_pile, pioche, &cpt_pioche, td, renderer);
     } else {
@@ -132,10 +164,18 @@ int main() {
         td = next_tour(td.tour, td.direction);  // Move this line inside the while loop
     }
     checkWin(size_hand1, size_hand2);
-    displayVictory(renderer);
+    if (size_hand1 == 0) {
+        displayVictory(renderer, "Victoire du joueur 1");
+    } else {
+    displayVictory(renderer, "Victoire du joueur 2");
+    }
+    SDL_RenderPresent(renderer);
+    SDL_Delay(5000);
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
     SDL_Quit();
+    // close_tcp_socket(socket);
 
     return 0;
 }
+
